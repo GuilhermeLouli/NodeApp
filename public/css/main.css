@@ -23,6 +23,10 @@ form {
   text-align: center;
 }
 
+.detailImage {
+  max-width: 400px;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;
