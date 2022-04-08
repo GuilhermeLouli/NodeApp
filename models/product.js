@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { title } = require('process');
 
 const p = path.join(
     path.dirname(require.main.filename), 
@@ -27,7 +28,7 @@ module.exports = class Product {
         this.id = Math.random().toString(); //AAAAAAAAAA ugly
         getProductsFromFile(products => {
             products.push(this);
-            fs.writeFile(p, JSON.stringify(products), (err) =>{
+            fs.writeFile(p, JSON.stringify(products), (err) => {
                 console.log(err);
             });
         });
