@@ -7,7 +7,7 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/index', {
         prods: rows,
         pageTitle: 'Shop',
-        path: '/' //highlight navigation item
+        path: '/products' //highlight navigation item
       });
     })
     .catch(err => console.log(err));
