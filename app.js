@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error')
 
 const sequelize = require('./util/database'); //this is the path
-const Product = require('./models/product');
-const User = require('./models/user');
+const Product = require('./models/productModel');
+const User = require('./models/userModel');
+const Cart = require('./models/cartModel');
+const CartItem = require('./models/cart-itemModel');
 
 const app = express();
 
@@ -33,11 +35,15 @@ app.use(errorController.get404);
 
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 
 
 sequelize
-  //.sync({ force: true })
-  .sync()
+  .sync({ force: true })
+  //.sync()
   .then(result => {
     return User.findByPk(1);
     //console.log(result)
