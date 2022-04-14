@@ -40,28 +40,34 @@ Cart.belongsTo(User);
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
 
-
+let localUser = undefined;
 sequelize
   //.sync({ force: true })
   .sync()
   .then(result => {
-    return User.findByPk(1);
-    //console.log(result)
+    return User.findByPk(1)
   })
   .then(user => {
     if (!user) {
-      return User.create({ name: 'Gui', email: 'gui@gmail.com' });
+      return User.create({ name: 'Bill', email: 'bill@xxx.yyy' })
     }
     return user;
   })
   .then(user => {
-    //console.log(user);
-    return user.createCart();
+    localUser = user;
+    return localUser.getCart();
+  })
+  .then(cart => {
+    if (!cart) {
+      // only create if no cart exists
+      return localUser.createCart();
+    }
+    return cart;
   })
   .then(cart => {
     app.listen(3000);
   })
   .catch(err => {
-    console.log(err)
+    console.log(err);
   });
 
