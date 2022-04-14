@@ -8,8 +8,8 @@ const Product = require('./models/productModel');
 const User = require('./models/userModel');
 const Cart = require('./models/cartModel');
 const CartItem = require('./models/cart-itemModel');
-const Order = require('./models/order');
-const OrderItem = require('./models/order-item');
+const Order = require('./models/orderModel');
+const OrderItem = require('./models/order-itemModel');
 
 const app = express();
 
