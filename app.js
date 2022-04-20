@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const errorController = require('./controllers/error')
 
-const sequelize = require('./util/database'); //this is the path
+const sequelize = require('./util/database');
 const Product = require('./models/productModel');
 const User = require('./models/userModel');
 const Cart = require('./models/cartModel');
@@ -65,7 +65,6 @@ sequelize
   })
   .then(cart => {
     if (!cart) {
-      // only create if no cart exists
       return localUser.createCart();
     }
     return cart;
